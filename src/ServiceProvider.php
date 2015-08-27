@@ -1,10 +1,10 @@
 <?php
 
-namespace Jenky\Laravel-notification;
+namespace Jenky\LaravelNotification;
 
 use Illuminate\Support\ServiceProvider;
 
-class Laravel-notificationServiceProvider extends ServiceProvider
+class ServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
