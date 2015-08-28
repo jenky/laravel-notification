@@ -65,6 +65,10 @@ class NotificationManager implements Contracts\Factory
     {
         $drivers = is_array($drivers) ? $drivers : func_get_args();
 
+        if (!$drivers) {
+            $drivers = config('notification.default');
+        }
+
         $this->drivers = $drivers;
 
         return $this;
@@ -155,7 +159,7 @@ class NotificationManager implements Contracts\Factory
      * Get notification messages for user
      * 
      * @param int $userId
-     * @return \Jenky\LaravelNotification\NotificationManager
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function user($userId)
     {
@@ -164,17 +168,27 @@ class NotificationManager implements Contracts\Factory
 
     /**
      * Save the entry to the database
+     * 
+     * @return bool
      */
     protected function save()
     {
-        return Models\Alert::create([
-            'user_id' => $this->from,
+        $data = [
+            'user_id'         => $this->from,
             'alerted_user_id' => $this->to,
-            'content_type' => $this->contentType,
-            'content_id' => $this->contentId,
-            'view' => $this->view,
-            'extra_data' => $this->data,
-            'driver' => $this->drivers,
-        ]);
+            'content_type'    => $this->contentType,
+            'content_id'      => $this->contentId,
+            'view'            => $this->view,
+            'extra_data'      => $this->data,
+            'driver'          => $this->drivers,
+        ];
+
+        $validator = $this->app['validator']->make($data, Models\Alert::$rules);
+
+        if ($validator->fails()) {
+            return false;
+        }
+
+        return Models\Alert::create($data);
     }
 }

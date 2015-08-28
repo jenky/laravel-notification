@@ -23,7 +23,10 @@
     "autoload": {
         "psr-4": {
             "Jenky\\LaravelNotification\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"            
+        ]
     },
     "autoload-dev": {
         "psr-4": {

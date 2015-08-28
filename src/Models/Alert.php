@@ -31,6 +31,18 @@ class Alert extends Model
     ];
 
     /**
+     * Validation rules
+     * 
+     * @return array
+     */ 
+    public static $rules = [
+        'user_id'         => 'integer',
+        'alerted_user_id' => 'required|integer',
+        'content_type'    => 'required',
+        'content_id'      => 'required|integer',
+    ];
+
+    /**
      * @Relation
      */
     public function content()
