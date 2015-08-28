@@ -152,7 +152,10 @@ class NotificationManager implements Contracts\Factory
     }
 
     /**
+     * Get notification messages for user
      * 
+     * @param int $userId
+     * @return \Jenky\LaravelNotification\NotificationManager
      */
     public function user($userId)
     {

@@ -46,7 +46,7 @@ interface Factory
      * @return \Jenky\LaravelNotification\NotificationManager
      */
     public function extra(array $data);
-
+    
     /**
      * Send the alert
      * 
@@ -56,4 +56,12 @@ interface Factory
      * @return void
      */ 
     public function send($from, $to, array $data = []);
+
+    /**
+     * Get notification messages for user
+     * 
+     * @param int $userId
+     * @return \Jenky\LaravelNotification\NotificationManager
+     */
+    public function user($userId);
 }
