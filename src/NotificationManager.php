@@ -152,6 +152,14 @@ class NotificationManager implements Contracts\Factory
     }
 
     /**
+     * 
+     */
+    public function user($userId)
+    {
+        return Models\Alert::where('user_id', '=', $userId);            
+    } 
+
+    /**
      * Save the entry to the database
      */
     protected function save()
@@ -165,5 +173,5 @@ class NotificationManager implements Contracts\Factory
             'extra_data' => $this->data,
             'driver' => $this->drivers,
         ]);
-    } 
+    }
 }
