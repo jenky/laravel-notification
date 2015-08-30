@@ -2,7 +2,7 @@
 
 namespace Jenky\LaravelNotification\Contracts;
 
-interface User
+interface Provider
 {
     /**
      * Mark notifications as read
@@ -10,12 +10,12 @@ interface User
      * @param mixed $ids
      * @return void
      */ 
-    public function read($ids);
+    // public function read($ids);
 
     /**
      * Mark all notifications as read
      * 
      * @return void
      */ 
-    public function readAll();
+    // public function readAll();
 }

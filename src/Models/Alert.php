@@ -26,7 +26,6 @@ class Alert extends Model
      * @var array
      */
     protected $casts = [
-        'driver' => 'array',
         'extra_data' => 'array',
     ];
 
@@ -38,8 +37,6 @@ class Alert extends Model
     public static $rules = [
         'user_id'         => 'integer',
         'alerted_user_id' => 'required|integer',
-        'content_type'    => 'required',
-        'content_id'      => 'required|integer',
     ];
 
     /**
@@ -72,5 +69,25 @@ class Alert extends Model
     public function receiver()
     {
         return $this->belongsTo(config('notification.model'), 'alerted_user_id');
+    }
+
+    /**
+     * Filter all read alerts
+     * 
+     * @return \Illuminate\Database\Eloquent\Builder
+     */ 
+    public function scopeRead($query)
+    {
+        return $query->whereNotNull('viewed_at');
+    }
+
+    /**
+     * Filter all unread alerts
+     * 
+     * @return \Illuminate\Database\Eloquent\Builder
+     */ 
+    public function scopeUnread($query)
+    {
+        return $query->whereNull('viewed_at');
     }
 }

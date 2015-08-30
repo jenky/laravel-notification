@@ -2,18 +2,6 @@
 
 return [
 	
-    /*
-    |--------------------------------------------------------------------------
-    | Default Notification Driver
-    |--------------------------------------------------------------------------
-    |
-    | This option controls the notification driver that will be utilized.
-    | Supported: "message", "mail"
-    |
-    */
-
-    'default' => ['message', 'mail'],
-
 	/*
     |--------------------------------------------------------------------------
     | User Model
@@ -28,6 +16,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default Notification Driver
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the notification driver that will be utilized.
+    | Supported: "alert", "mail"
+    |
+    */
+
+    'default' => 'alert',
+
+    /*
+    |--------------------------------------------------------------------------
     | Notification Drivers
     |--------------------------------------------------------------------------
     |
@@ -36,6 +36,13 @@ return [
     */
 
     'drivers' => [
+    
+        'alert' => [
+            'driver' => 'alert',
+        ],
 
+        'mail' => [
+            'driver' => 'mail',
+        ],
     ],
 ];
