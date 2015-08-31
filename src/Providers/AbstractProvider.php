@@ -31,7 +31,7 @@ abstract class AbstractProvider implements ProviderContract
     /**
      * @var array
      */
-    protected $data;
+    protected $data = [];
 
     /**
      * Create a new provider instance.
