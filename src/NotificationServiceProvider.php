@@ -37,13 +37,13 @@ class NotificationServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom($configPath, 'notification');
 
-        $this->app->bindShared('Jenky\LaravelNotification\Contracts\Factory', function ($app) {
+        $this->app->bindShared('notification', function ($app) {
             return new NotificationManager($app);
         });
     }
 
     public function provides()
     {
-        return ['Jenky\LaravelNotification\Contracts\Factory'];
+        return ['notification'];
     }
 }
