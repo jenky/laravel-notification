@@ -12,17 +12,32 @@ class Mail extends AbstractProvider
     protected $subject;
 
     /**
+     * Set the email subject.
+     * 
+     * @return \Jenky\LaravelNotification\Providers\Mail
+     */ 
+    public function subject($subject)
+    {
+        $this->subject = strval($subject);
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */ 
     public function message()
     {
         $params = func_get_args();
 
-        $this->subject = $params[0];
-        $this->view = $params[1];
+        $this->view = $params[0];
+
+        if (isset($params[1])) {
+            $this->data = $params[1];
+        }
 
         if (isset($params[2])) {
-            $this->data = $params[2];
+            $this->subject = $params[2];
         }
 
         return $this;
