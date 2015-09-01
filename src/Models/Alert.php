@@ -60,7 +60,7 @@ class Alert extends Model
      */
     public function sender()
     {
-        return $this->belongsTo(config('notification.model'));
+        return $this->belongsTo(config('notification.model'), 'user_id');
     }
 
     /**
@@ -89,5 +89,42 @@ class Alert extends Model
     public function scopeUnread($query)
     {
         return $query->whereNull('viewed_at');
+    }
+
+    /**
+     * Render alert.
+     * 
+     * @param string $view
+     * @param array $data
+     * @return string
+     */ 
+    public function view($view = null, array $data = [])
+    {
+        $view = $view ? $view : 'notification::alert_' . $this->getAttribute('view');
+
+        $data['notification'] = $this;
+        $data['sender'] = $this->sender;
+        $data['receiver'] = $this->receiver;
+        $data['content'] = $this->getContent();
+        $data['extra'] = $this->getAttribute('extra_data');
+
+        return view($view, $data);
+    }
+
+    /**
+     * Get the alert's content.
+     * 
+     * @return mixed
+     */ 
+    protected function getContent()
+    {
+        $contentType = $this->getAttribute('content_type');
+        $contentId = $this->getAttribute('content_id');
+
+        if ($contentType && $contentId) {
+            return with(new $contentType)->find($contentId);
+        }
+
+        return null;
     }
 }

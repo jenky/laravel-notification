@@ -32,6 +32,11 @@ class NotificationManager extends Manager implements Contracts\Factory
         return $this->buildProvider('Jenky\LaravelNotification\Providers\Mail', 'mail');
     }
 
+    public function createMobileDriver()
+    {
+        return $this->buildProvider('Jenky\LaravelNotification\Providers\Mobile', 'mobile');
+    }
+
     public function getDefaultDriver()
     {
         return config('notification.default');

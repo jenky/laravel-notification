@@ -22,5 +22,5 @@ trait Notifiable
     public function notification()
     {
         return Models\Alert::where('user_id', '=', $this->getAttribute('id'));
-    }
+    }    
 }
