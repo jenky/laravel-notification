@@ -86,6 +86,6 @@ abstract class AbstractProvider implements ProviderContract
 
     protected function getConfig($key)
     {
-        return config("notification.{$config}.{$key}");
+        return config("notification.drivers.{$this->config}.{$key}");
     }
 }

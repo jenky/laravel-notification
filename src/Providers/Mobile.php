@@ -11,6 +11,16 @@ class Mobile extends AbstractProvider
      */ 
     protected $push;
 
+    /**
+     * @var array
+     */ 
+    protected $appConfig;
+
+    /**
+     * @var \Sly\NotificationPusher\Model\Message
+     */ 
+    protected $message;
+
     public function __construct($config)
     {
         parent::__construct($config);
@@ -26,9 +36,9 @@ class Mobile extends AbstractProvider
         $params = func_get_args();
 
         $message = isset($params[0]) ? $params[0] : '';
-        $options = isset($params[1]) ? $params[1] : '';
+        $options = isset($params[1]) ? $params[1] : [];
 
-        $this->push->Message($message, $options);
+        $this->message = $this->push->Message($message, $options);
 
         return $this;
     }
@@ -40,8 +50,9 @@ class Mobile extends AbstractProvider
     {        
         $to = is_array($this->to) ? $this->device($this->to) : $this->to;
 
-        return $this->push->to($to)
-            ->send();
+        return $this->push->app($this->appConfig)
+            ->to($to)
+            ->send($this->message);
     }
 
     /**
@@ -52,10 +63,8 @@ class Mobile extends AbstractProvider
      */ 
     public function app($appName)
     {
-        $config = is_array($appName) ? $appName : $this->config[$appName];
-
-        $this->push->app($config);
-
+        $this->appConfig = is_array($appName) ? $appName : $this->getConfig($appName);
+    
         return $this;
     }
 
@@ -75,9 +84,9 @@ class Mobile extends AbstractProvider
                 $devices[] = $this->push->Device($_device['token'], $_device['options']);
             }
 
-            $this->push->DeviceCollection($devices);
+            return $this->push->DeviceCollection($devices);
         }
 
-        return $this;
+        return null;
     }
 }
