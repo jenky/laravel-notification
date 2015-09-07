@@ -8,29 +8,29 @@ class Mobile extends AbstractProvider
 {
     /**
      * @var \Davibennun\LaravelPushNotification\PushNotification
-     */ 
+     */
     protected $push;
 
     /**
      * @var array
-     */ 
+     */
     protected $appConfig;
 
     /**
      * @var \Sly\NotificationPusher\Model\Message
-     */ 
+     */
     protected $message;
 
     public function __construct($config)
     {
         parent::__construct($config);
 
-        $this->push = new PushNotification;
+        $this->push = new PushNotification();
     }
 
     /**
      * {@inheritdoc}
-     */ 
+     */
     public function message()
     {
         $params = func_get_args();
@@ -45,9 +45,9 @@ class Mobile extends AbstractProvider
 
     /**
      * {@inheritdoc}
-     */ 
+     */
     public function send()
-    {        
+    {
         $to = is_array($this->to) ? $this->device($this->to) : $this->to;
 
         return $this->push->app($this->appConfig)
@@ -59,25 +59,26 @@ class Mobile extends AbstractProvider
      * Set the app config.
      * 
      * @param mixed $appName
+     *
      * @return \Jenky\LaravelNotification\Providers\Mobile
-     */ 
+     */
     public function app($appName)
     {
         $this->appConfig = is_array($appName) ? $appName : $this->getConfig($appName);
-    
+
         return $this;
     }
 
     /**
-     * Set the device tokens
+     * Set the device tokens.
      * 
      * @param mixed $device
+     *
      * @return \Jenky\LaravelNotification\Providers\Mobile
-     */ 
+     */
     public function device($device)
     {
-        if (is_array($device))
-        {
+        if (is_array($device)) {
             $devices = [];
 
             foreach ($device as $_device) {
@@ -87,6 +88,6 @@ class Mobile extends AbstractProvider
             return $this->push->DeviceCollection($devices);
         }
 
-        return null;
+        return;
     }
 }

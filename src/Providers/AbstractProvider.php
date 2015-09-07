@@ -7,21 +7,21 @@ use Jenky\LaravelNotification\Contracts\Provider as ProviderContract;
 abstract class AbstractProvider implements ProviderContract
 {
     /**
-     * Config key
+     * Config key.
      * 
      * @var string
-     */ 
-    protected $config;    
+     */
+    protected $config;
 
     /**
      * @var string
      */
-    protected $view; 
+    protected $view;
 
     /**
      * @var int
      */
-    protected $from; 
+    protected $from;
 
     /**
      * @var int
@@ -37,20 +37,22 @@ abstract class AbstractProvider implements ProviderContract
      * Create a new provider instance.
      * 
      * @param string $config
+     *
      * @return void
-     */ 
+     */
     public function __construct($config)
     {
         $this->config = strval($config);
     }
 
     /**
-     * Set the sender id
+     * Set the sender id.
      * 
      * @param int $id
+     *
      * @return \Jenky\LaravelNotification\Providers\AbstractProvider
      */
-    public function from($id) 
+    public function from($id)
     {
         $this->from = $id;
 
@@ -58,12 +60,13 @@ abstract class AbstractProvider implements ProviderContract
     }
 
     /**
-     * Set the receiver id
+     * Set the receiver id.
      * 
      * @param int $id
+     *
      * @return \Jenky\LaravelNotification\Providers\AbstractProvider
      */
-    public function to($id) 
+    public function to($id)
     {
         $this->to = $id;
 
@@ -74,14 +77,14 @@ abstract class AbstractProvider implements ProviderContract
      * Set the notification message.
      * 
      * @return \Jenky\LaravelNotification\Providers\AbstractProvider
-     */ 
+     */
     abstract public function message();
 
     /**
-     * Send the notification
+     * Send the notification.
      * 
      * @return void
-     */ 
+     */
     abstract public function send();
 
     protected function getConfig($key)

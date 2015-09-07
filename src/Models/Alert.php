@@ -30,10 +30,10 @@ class Alert extends Model
     ];
 
     /**
-     * Validation rules
+     * Validation rules.
      * 
      * @return array
-     */ 
+     */
     public static $rules = [
         'user_id'         => 'integer',
         'alerted_user_id' => 'required|integer',
@@ -72,20 +72,20 @@ class Alert extends Model
     }
 
     /**
-     * Filter all read alerts
+     * Filter all read alerts.
      * 
      * @return \Illuminate\Database\Eloquent\Builder
-     */ 
+     */
     public function scopeRead($query)
     {
         return $query->whereNotNull('viewed_at');
     }
 
     /**
-     * Filter all unread alerts
+     * Filter all unread alerts.
      * 
      * @return \Illuminate\Database\Eloquent\Builder
-     */ 
+     */
     public function scopeUnread($query)
     {
         return $query->whereNull('viewed_at');
@@ -95,12 +95,13 @@ class Alert extends Model
      * Render alert.
      * 
      * @param string $view
-     * @param array $data
+     * @param array  $data
+     *
      * @return string
-     */ 
+     */
     public function view($view = null, array $data = [])
     {
-        $view = $view ? $view : 'notification::alert_' . $this->getAttribute('view');
+        $view = $view ? $view : 'notification::alert_'.$this->getAttribute('view');
 
         $data['notification'] = $this;
         $data['sender'] = $this->sender;
@@ -115,16 +116,16 @@ class Alert extends Model
      * Get the alert's content.
      * 
      * @return mixed
-     */ 
+     */
     protected function getContent()
     {
         $contentType = $this->getAttribute('content_type');
         $contentId = $this->getAttribute('content_id');
 
         if ($contentType && $contentId) {
-            return with(new $contentType)->find($contentId);
+            return with(new $contentType())->find($contentId);
         }
 
-        return null;
+        return;
     }
 }

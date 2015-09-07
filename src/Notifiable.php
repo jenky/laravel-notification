@@ -15,12 +15,12 @@ trait Notifiable
     }
 
     /**
-     * Get notification builder
+     * Get notification builder.
      * 
      * @return \Illuminate\Database\Eloquent\Builder
-     */ 
+     */
     public function notification()
     {
         return Models\Alert::where('user_id', '=', $this->getAttribute('id'));
-    }    
+    }
 }

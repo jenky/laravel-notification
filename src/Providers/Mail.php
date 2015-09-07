@@ -5,17 +5,17 @@ namespace Jenky\LaravelNotification\Providers;
 class Mail extends AbstractProvider
 {
     /**
-     * Email subject
+     * Email subject.
      * 
      * @var string
-     */ 
+     */
     protected $subject;
 
     /**
      * Set the email subject.
      * 
      * @return \Jenky\LaravelNotification\Providers\Mail
-     */ 
+     */
     public function subject($subject)
     {
         $this->subject = strval($subject);
@@ -25,7 +25,7 @@ class Mail extends AbstractProvider
 
     /**
      * {@inheritdoc}
-     */ 
+     */
     public function message()
     {
         $params = func_get_args();
@@ -45,11 +45,10 @@ class Mail extends AbstractProvider
 
     /**
      * {@inheritdoc}
-     */ 
+     */
     public function send()
-    {        
-        app('mailer')->send($this->view, $this->data, function($message)
-        {
+    {
+        app('mailer')->send($this->view, $this->data, function ($message) {
             if (is_array($this->to)) {
                 list($email, $name) = $this->to;
                 $message->to($email, $name);

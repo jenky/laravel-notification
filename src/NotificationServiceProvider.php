@@ -13,15 +13,15 @@ class NotificationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configPath = __DIR__ . '/../config/notification.php';
+        $configPath = __DIR__.'/../config/notification.php';
         $viewsPath = __DIR__.'/../views';
         $assetsPath = __DIR__.'/../assets';
-        
+
         $this->loadViewsFrom($viewsPath, 'notification');
         $this->publishes([$configPath => config_path('notification.php')], 'config');
         $this->publishes([
-            $viewsPath => base_path('resources/views/vendor/notification'),
-            $assetsPath . '/js' => base_path('resources/assets/notification'),
+            $viewsPath                => base_path('resources/views/vendor/notification'),
+            $assetsPath.'/js'         => base_path('resources/assets/notification'),
             __DIR__.'/../migrations/' => $this->app->databasePath(),
         ]);
     }
@@ -33,7 +33,7 @@ class NotificationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $configPath = __DIR__ . '/../config/notification.php';
+        $configPath = __DIR__.'/../config/notification.php';
 
         $this->mergeConfigFrom($configPath, 'notification');
 
