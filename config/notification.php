@@ -1,7 +1,7 @@
 <?php
 
 return [
-    
+
     /*
     |--------------------------------------------------------------------------
     | User Model
@@ -36,7 +36,7 @@ return [
     */
 
     'drivers' => [
-    
+
         'alert' => [
             'driver' => 'alert',
         ],
@@ -50,12 +50,12 @@ return [
                 'environment' => 'development',
                 'certificate' => '/path/to/certificate.pem',
                 'passPhrase'  => 'password',
-                'service'     => 'apns'
+                'service'     => 'apns',
             ],
             'android' => [
                 'environment' => 'production',
                 'apiKey'      => 'yourAPIKey',
-                'service'     => 'gcm'
+                'service'     => 'gcm',
             ],
         ],
     ],

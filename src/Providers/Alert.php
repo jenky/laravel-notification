@@ -8,22 +8,23 @@ class Alert extends AbstractProvider
 {
     /**
      * @var string
-     */ 
+     */
     protected $contentType = '';
 
     /**
      * @var int
-     */ 
+     */
     protected $contentId = 0;
 
     /**
-     * Set the content for the alert
+     * Set the content for the alert.
      * 
      * @param string $contentType
-     * @param int $contentId
+     * @param int    $contentId
+     *
      * @return \Jenky\LaravelNotification\Providers\Alert
      */
-    public function content($contentType, $contentId) 
+    public function content($contentType, $contentId)
     {
         $this->contentType = strval($contentType);
         $this->contentId = intval($contentId);
@@ -33,7 +34,7 @@ class Alert extends AbstractProvider
 
     /**
      * {@inheritdoc}
-     */ 
+     */
     public function message()
     {
         $params = func_get_args();
@@ -49,7 +50,7 @@ class Alert extends AbstractProvider
 
     /**
      * {@inheritdoc}
-     */ 
+     */
     public function send()
     {
         $data = [

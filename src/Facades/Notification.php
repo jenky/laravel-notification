@@ -4,7 +4,7 @@ namespace Jenky\LaravelNotification\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Notification extends Facade 
+class Notification extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -12,7 +12,7 @@ class Notification extends Facade
      * @return string
      */
     protected static function getFacadeAccessor()
-    { 
-        return 'notification'; 
+    {
+        return 'notification';
     }
 }
